@@ -4,13 +4,14 @@ class CustomTextField extends StatefulWidget {
   final TextEditingController controller;
   final String hintText;
   final TextInputType keyboardType;
-  final bool obscureText;
+  final bool obscuredText;
   final String? Function(String?)? validator;
-  const CustomTextField({super.key,
+  const CustomTextField({
+    super.key,
     required this.controller,
     required this.hintText,
     this.keyboardType = TextInputType.text,
-    this.obscureText = false,
+    this.obscuredText = false,
     this.validator,
   });
 
@@ -19,7 +20,6 @@ class CustomTextField extends StatefulWidget {
 }
 
 class _CustomTextFieldState extends State<CustomTextField> {
-
   late bool _isObscured;
 
   @override
@@ -31,7 +31,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   Widget build(BuildContext context) {
-
     final theme = Theme.of(context);
 
     return TextFormField(
@@ -40,15 +39,27 @@ class _CustomTextFieldState extends State<CustomTextField> {
         filled: true,
         fillColor: theme.colorScheme.tertiary,
         labelText: widget.hintText,
-        labelStyle: theme.textTheme.labellarge,
-        border: InputBorder.none,
-        suffixIcon: widget.obscureText ?
-            IconButton(onPressed: () {
-              setState( () {
-                _isObscured = !_isObscured;
-              });
-            }, 
-            icon: icon)
+        labelStyle: theme.textTheme.labelLarge,
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(12),
+          borderSide: BorderSide(
+            color: theme.colorScheme.primary, // or Colors.grey
+            width: 1.5,
+          ),
+        ),
+        suffixIcon:
+            widget.obscuredText
+                ? IconButton(
+                  onPressed: () {
+                    setState(() {
+                      _isObscured = !_isObscured;
+                    });
+                  },
+                  icon: Icon(
+                    _isObscured ? Icons.visibility_off : Icons.visibility,
+                  ),
+                )
+                : null,
       ),
     );
   }

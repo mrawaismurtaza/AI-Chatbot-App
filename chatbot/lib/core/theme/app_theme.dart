@@ -12,6 +12,7 @@ class AppTheme {
       background: Colors.white,
       onPrimary: Colors.black,
       onSurface: Colors.black,
+      tertiary: Colors.grey,
     ),
     textTheme: const TextTheme(
       bodyLarge: TextStyle(color: Colors.black, fontSize: 16),
@@ -30,6 +31,7 @@ class AppTheme {
       background: Colors.black,
       onSurface: Colors.white,
       onPrimary: Colors.white,
+      tertiary: Colors.grey,
     ),
   );
 }
