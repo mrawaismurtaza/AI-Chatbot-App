@@ -1,6 +1,12 @@
+import 'dart:collection';
+
+import 'package:chatbot/features/blocs/login/login_bloc.dart';
+import 'package:chatbot/features/blocs/login/login_event.dart';
+import 'package:chatbot/features/blocs/login/login_state.dart';
 import 'package:chatbot/features/presentation/widgets/custom_button.dart';
 import 'package:chatbot/features/presentation/widgets/text_field.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:go_router/go_router.dart';
 
@@ -35,6 +41,26 @@ class _LoginState extends State<Login> {
               CustomTextField( controller: passwordController, hintText: "Enter Password",
               ),
               SizedBox(height: 40),
+              BlocListener<LoginBloc, LoginState>(
+                listener:(context, state) {
+                  if ( state is LoginFailure) {
+                    Fluttertoast.showToast(msg: "Login Failed");
+                  } else if ( state is LoginSuccess ) {
+                    Fluttertoast.showToast(msg: "Login Successful");
+                  }
+                },
+                child: CustomButton(text: "Login", onPressed: () {
+                  final email = emailController.text.trim();
+                final password = passwordController.text.trim();
+
+                  if(email.isEmpty || password.isEmpty) {
+                    Fluttertoast.showToast(msg: "Email or password cannot be Empty");
+                    return;
+                  }
+
+                  context.read<LoginBloc>().add(LoginSubmitted(email: email, password: password));
+                }),
+              ),
               CustomButton( text: "Login",
                 onPressed: () { 
                   Fluttertoast.showToast(msg: "Login Successfull");
