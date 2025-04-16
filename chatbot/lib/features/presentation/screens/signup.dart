@@ -54,28 +54,37 @@ class _SignupState extends State<Signup> {
             SizedBox(height: 50),
             BlocListener<SignupBloc, SignupState>(
               listener: (context, state) {
-                if (state is LoginFailure) {
-                  Fluttertoast.showToast(msg: "Login Failed");
-                } else if (state is LoginSuccess) {
-                  context.go('/login');
+                if (state is SignUpFailure) {
+                  Fluttertoast.showToast(msg: "Signup Failed");
+                } else if (state is SignUpSuccess) {
+                  Fluttertoast.showToast(msg: "Signup Successful");
+                  context.go('/login'); // Now it will navigate properly
                 }
               },
-              child: CustomButton(text: "SignUp", onPressed: () {
-                final email = emailController.text.trim();
-                final password = passwordController.text.trim();
-                final confirmPassword = confirmPasswordController.text.trim();
+              child: CustomButton(
+                text: "SignUp",
+                onPressed: () {
+                  Fluttertoast.showToast(msg: "Button is pressed");
+                  final email = emailController.text.trim();
+                  final password = passwordController.text.trim();
+                  final confirmPassword = confirmPasswordController.text.trim();
 
-                if(email.isEmpty || password.isEmpty) {
-                  Fluttertoast.showToast(msg: "Email or password cannot be Empty");
-                  return;
-                }
-                if ( password != confirmPassword ){
-                  Fluttertoast.showToast(msg: "Password should be same");
-                  return;
-                }
+                  if (email.isEmpty || password.isEmpty) {
+                    Fluttertoast.showToast(
+                      msg: "Email or password cannot be Empty",
+                    );
+                    return;
+                  }
+                  if (password != confirmPassword) {
+                    Fluttertoast.showToast(msg: "Password should be same");
+                    return;
+                  }
 
-                context.read<SignupBloc>().add(SignUpSubmitted(email: email, password: password));
-              }),
+                  context.read<SignupBloc>().add(
+                    SignUpSubmitted(email: email, password: password),
+                  );
+                },
+              ),
             ),
 
             Row(

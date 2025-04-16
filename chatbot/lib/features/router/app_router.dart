@@ -12,15 +12,16 @@ class AppRouter {
     routes: [
       GoRoute(path: '/login', builder: (context, state) => const Login()),
       GoRoute(path: '/signup', builder: (context, state) => const Signup()),
+      GoRoute(path: '/home', builder: (context, state) => const Home()),
 
-      ShellRoute(
-        // builder: (context, state, child) {
-        //   return C
-        // },
-        routes: [
-          GoRoute(path: '/home', builder: (context, state) => Home()),
-        ],
-      ),
-    ], 
+    //   ShellRoute(
+    //     builder: (context, state, child) {
+    //       return C
+    //     },
+    //     routes: [
+    //       GoRoute(path: '/home', builder: (context, state) => Home()),
+    //     ],
+    //   ),
+     ], 
     );
 }

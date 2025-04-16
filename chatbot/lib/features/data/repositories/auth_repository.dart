@@ -24,19 +24,22 @@ class AuthRepository {
 }
 
 
-  Future<void> login({required String email,required String password}) async {
-    try {
-      final response = await supabase.auth.signInWithPassword(
-        email: email,
-        password: password,
-      );
+Future<void> login({required String email, required String password}) async {
+  try {
+    final response = await supabase.auth.signInWithPassword(
+      email: email,
+      password: password,
+    );
 
-      final user = response.user;
-      if (user == null) {
-        throw Exception('Login failed: No user returned');
-      }
-    } catch (e) {
-      rethrow;
+    final user = response.user;
+    if (user == null) {
+      throw Exception('Login failed: No user returned');
     }
+    print('Login successful: ${user.email}');
+  } catch (e) {
+    print('Login failed: $e');
+    rethrow;
   }
+}
+
 }

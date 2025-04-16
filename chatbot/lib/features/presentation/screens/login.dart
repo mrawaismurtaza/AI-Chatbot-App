@@ -31,40 +31,52 @@ class _LoginState extends State<Login> {
     return Scaffold(
       body: Center(
         child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 30),
+          padding: const EdgeInsets.symmetric(horizontal: 30),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              CustomTextField( controller: emailController, hintText: "Enter Email"),
+              CustomTextField(
+                controller: emailController,
+                hintText: "Enter Email",
+              ),
               SizedBox(height: 40),
-              CustomTextField( controller: passwordController, hintText: "Enter Password",
+              CustomTextField(
+                controller: passwordController,
+                hintText: "Enter Password",
               ),
               SizedBox(height: 40),
               BlocListener<LoginBloc, LoginState>(
-                listener:(context, state) {
-                  if ( state is LoginFailure) {
-                    Fluttertoast.showToast(msg: "Login Failed");
-                  } else if ( state is LoginSuccess ) {
+                listener: (context, state) {
+                  if (state is LoginFailure) {
+                    Fluttertoast.showToast(msg: state.message);
+                  }
+                  if (state is LoginSuccess) {
                     Fluttertoast.showToast(msg: "Login Successful");
+                    context.go('/home');
+                  } else {
+                    Fluttertoast.showToast(msg: "Loginessful");
+
                   }
                 },
-                child: CustomButton(text: "Login", onPressed: () {
-                  final email = emailController.text.trim();
-                final password = passwordController.text.trim();
+                child: CustomButton(
+                  text: "Login",
+                  onPressed: () {
+                    final email = emailController.text.trim();
+                    final password = passwordController.text.trim();
 
-                  if(email.isEmpty || password.isEmpty) {
-                    Fluttertoast.showToast(msg: "Email or password cannot be Empty");
-                    return;
-                  }
+                    if (email.isEmpty || password.isEmpty) {
+                      Fluttertoast.showToast(
+                        msg: "Email or password cannot be empty",
+                      );
+                      return;
+                    }
 
-                  context.read<LoginBloc>().add(LoginSubmitted(email: email, password: password));
-                }),
-              ),
-              CustomButton( text: "Login",
-                onPressed: () { 
-                  Fluttertoast.showToast(msg: "Login Successfull");
-                },
+                    context.read<LoginBloc>().add(
+                      LoginSubmitted(email: email, password: password),
+                    );
+                  },
+                ),
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
