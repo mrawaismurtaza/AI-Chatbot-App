@@ -32,7 +32,7 @@ class ChatBloc extends Bloc<ChatEvent, ChatState> {
       final reply = await chatRepository.getGeminiReply(event.message);
       updatedMessages.add({'role': 'bot', 'text': reply});
       emit(ChatLoaded(updatedMessages));
-      await chatRepository.saveMessage(event.userId, event.message, true);
+      // await chatRepository.saveMessage(event.userId, event.message, true);
     });
   }
 }

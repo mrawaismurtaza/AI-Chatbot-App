@@ -1,9 +1,11 @@
 import 'package:chatbot/core/theme/app_theme.dart';
 import 'package:chatbot/features/blocs/chat/chat-bloc.dart';
 import 'package:chatbot/features/blocs/login/login_bloc.dart';
+import 'package:chatbot/features/blocs/profile/profile_bloc.dart';
 import 'package:chatbot/features/blocs/signup/signup_bloc.dart';
 import 'package:chatbot/features/data/repositories/auth_repository.dart';
 import 'package:chatbot/features/data/repositories/chat_repository.dart';
+import 'package:chatbot/features/data/repositories/profile_repository.dart';
 import 'package:chatbot/features/router/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +23,9 @@ void setupDependencies() {
   getIt.registerFactory<SignupBloc>(() => SignupBloc(authRepository: getIt<AuthRepository>()));
    getIt.registerSingleton<ChatRepository>(ChatRepository());
   getIt.registerFactory<ChatBloc>(() => ChatBloc(getIt<ChatRepository>()));
+
+  getIt.registerSingleton<ProfileRepository>(ProfileRepository());
+  getIt.registerFactory<ProfileBloc>(() => ProfileBloc(getIt<ProfileRepository>()));
 }
 
 void main() async {
@@ -50,6 +55,7 @@ class MainApp extends StatelessWidget {
         BlocProvider<LoginBloc>(create: (_) => getIt<LoginBloc>()),
         BlocProvider<SignupBloc>(create: (_) => getIt<SignupBloc>()),
         BlocProvider<ChatBloc>(create: (_) => getIt<ChatBloc>()),
+        BlocProvider<ProfileBloc>(create: (_) => getIt<ProfileBloc>()),
       ],
       child: MaterialApp.router(
         debugShowCheckedModeBanner: false,
