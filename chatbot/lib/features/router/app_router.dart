@@ -1,6 +1,5 @@
-import 'dart:io';
 
-import 'package:chatbot/features/presentation/screens/home.dart';
+import 'package:chatbot/features/presentation/screens/forgotPassword.dart';
 import 'package:chatbot/features/presentation/screens/login.dart';
 import 'package:chatbot/features/presentation/screens/signup.dart';
 import 'package:chatbot/features/presentation/widgets/navbar.dart';
@@ -14,7 +13,7 @@ class AppRouter {
       GoRoute(path: '/login', builder: (context, state) => const Login()),
       GoRoute(path: '/signup', builder: (context, state) => const Signup()),
       GoRoute(path: '/home', builder: (context, state) => const MyNavBar()),
-
+      GoRoute(path: '/forgot-password', builder: (context, state) => const ForgotPasswordScreen()),
       
     ],
   );

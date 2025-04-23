@@ -6,6 +6,7 @@ class CustomTextField extends StatefulWidget {
   final TextInputType keyboardType;
   final bool obscuredText;
   final String? Function(String?)? validator;
+
   const CustomTextField({
     super.key,
     required this.controller,
@@ -24,7 +25,6 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
     _isObscured = widget.obscuredText;
   }
@@ -35,6 +35,9 @@ class _CustomTextFieldState extends State<CustomTextField> {
 
     return TextFormField(
       controller: widget.controller,
+      obscureText: _isObscured,
+      keyboardType: widget.keyboardType,
+      validator: widget.validator,
       decoration: InputDecoration(
         filled: true,
         fillColor: theme.colorScheme.tertiary,
@@ -43,23 +46,22 @@ class _CustomTextFieldState extends State<CustomTextField> {
         border: OutlineInputBorder(
           borderRadius: BorderRadius.circular(12),
           borderSide: BorderSide(
-            color: theme.colorScheme.primary, // or Colors.grey
+            color: theme.colorScheme.primary,
             width: 1.5,
           ),
         ),
-        suffixIcon:
-            widget.obscuredText
-                ? IconButton(
-                  onPressed: () {
-                    setState(() {
-                      _isObscured = !_isObscured;
-                    });
-                  },
-                  icon: Icon(
-                    _isObscured ? Icons.visibility_off : Icons.visibility,
-                  ),
-                )
-                : null,
+        suffixIcon: widget.obscuredText
+            ? IconButton(
+                onPressed: () {
+                  setState(() {
+                    _isObscured = !_isObscured;
+                  });
+                },
+                icon: Icon(
+                  _isObscured ? Icons.visibility_off : Icons.visibility,
+                ),
+              )
+            : null,
       ),
     );
   }

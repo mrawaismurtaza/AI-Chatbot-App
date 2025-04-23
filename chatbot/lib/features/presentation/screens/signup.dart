@@ -45,12 +45,15 @@ class _SignupState extends State<Signup> {
             CustomTextField(
               controller: passwordController,
               hintText: "Enter Password",
+              obscuredText: true,
             ),
             SizedBox(height: 50),
             CustomTextField(
               controller: confirmPasswordController,
               hintText: "Re-Enter Password",
+              obscuredText: true,
             ),
+
             SizedBox(height: 50),
             BlocListener<SignupBloc, SignupState>(
               listener: (context, state) {
@@ -64,7 +67,6 @@ class _SignupState extends State<Signup> {
               child: CustomButton(
                 text: "SignUp",
                 onPressed: () {
-                  Fluttertoast.showToast(msg: "Button is pressed");
                   final email = emailController.text.trim();
                   final password = passwordController.text.trim();
                   final confirmPassword = confirmPasswordController.text.trim();

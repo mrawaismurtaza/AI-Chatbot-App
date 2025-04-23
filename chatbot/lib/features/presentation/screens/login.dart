@@ -1,5 +1,3 @@
-import 'dart:collection';
-
 import 'package:chatbot/features/blocs/login/login_bloc.dart';
 import 'package:chatbot/features/blocs/login/login_event.dart';
 import 'package:chatbot/features/blocs/login/login_state.dart';
@@ -44,7 +42,17 @@ class _LoginState extends State<Login> {
               CustomTextField(
                 controller: passwordController,
                 hintText: "Enter Password",
+                obscuredText: true,
               ),
+
+              TextButton(
+                onPressed: () => context.go('/forgot-password'),
+                child: Text(
+                  "Forgot Password",
+                  style: TextStyle(color: theme.colorScheme.tertiary),
+                ),
+              ),
+
               SizedBox(height: 40),
               BlocListener<LoginBloc, LoginState>(
                 listener: (context, state) {
@@ -54,10 +62,7 @@ class _LoginState extends State<Login> {
                   if (state is LoginSuccess) {
                     Fluttertoast.showToast(msg: "Login Successful");
                     context.go('/home');
-                  } else {
-                    Fluttertoast.showToast(msg: "Loginessful");
-
-                  }
+                  } 
                 },
                 child: CustomButton(
                   text: "Login",

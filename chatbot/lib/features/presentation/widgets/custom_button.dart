@@ -9,14 +9,23 @@ class CustomButton extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return Container(
-      width: double.infinity,  // Ensure it expands to the available width
+      width: double.infinity, // Ensure it expands to the available width
       child: ElevatedButton(
         onPressed: onPressed,
         style: ElevatedButton.styleFrom(
           backgroundColor: theme.primaryColor,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(25),
+            side: BorderSide(
+              color: theme.colorScheme.onPrimary.withOpacity(
+                0.2,
+              ), // light border
+              width: 1.5,
+            ),
+          ),
           minimumSize: const Size(double.infinity, 70),
         ),
+
         child: Text(
           text,
           style: TextStyle(

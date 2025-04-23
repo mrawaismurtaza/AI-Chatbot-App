@@ -4,7 +4,6 @@ import 'package:chatbot/features/blocs/chat/chat_state.dart';
 import 'package:chatbot/features/presentation/widgets/chat_inputField.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_gemini/flutter_gemini.dart';
 import 'package:flutter_markdown/flutter_markdown.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
@@ -26,7 +25,7 @@ class _HomeState extends State<Home> {
     }
 
     return Scaffold(
-      appBar: AppBar(title: Text("AI Chatbot")),
+      appBar: AppBar(title: Center(child: Text("Smile Chat"))),
       body: Column(
         children: [
           Expanded(

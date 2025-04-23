@@ -64,32 +64,38 @@ class _ProfileState extends State<Profile> {
                   width: Width * 0.6,
                   padding: EdgeInsets.symmetric(
                     vertical: Height * 0.02,
-                    horizontal: Width * 0.02,
+                    horizontal: Width * 0.04,
                   ),
-                  decoration: BoxDecoration(border: Border.all()),
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color:
+                          Theme.of(context)
+                              .colorScheme
+                              .onSurface, 
+                    ),
+                    borderRadius: BorderRadius.circular(25), 
+                  ),
                   child: Text(name, style: theme.textTheme.bodyLarge),
                 ),
+
                 Container(
                   width: Width * 0.6,
                   padding: EdgeInsets.symmetric(
                     vertical: Height * 0.02,
-                    horizontal: Width * 0.02,
+                    horizontal: Width * 0.04,
                   ),
-                  decoration: BoxDecoration(border: Border.all()),
-                  child: Text(
-                    "Privacy Policy >",
-                    style: theme.textTheme.bodyLarge,
+                  decoration: BoxDecoration(
+                    border: Border.all(
+                      color:
+                          Theme.of(context)
+                              .colorScheme
+                              .onSurface, 
+                    ),
+                    borderRadius: BorderRadius.circular(25), 
                   ),
+                  child: Text("Privacy Policy", style: theme.textTheme.bodyLarge),
                 ),
-                Container(
-                  width: Width * 0.6,
-                  padding: EdgeInsets.symmetric(
-                    vertical: Height * 0.02,
-                    horizontal: Width * 0.02,
-                  ),
-                  decoration: BoxDecoration(border: Border.all()),
-                  child: Text("Others >", style: theme.textTheme.bodyLarge),
-                ),
+
                 CustomButton(
                   text: "Edit Profile",
                   onPressed: () {
@@ -100,9 +106,7 @@ class _ProfileState extends State<Profile> {
                   text: "Log Out",
                   onPressed: () async {
                     await Supabase.instance.client.auth.signOut();
-                    context.go(
-                      '/login',
-                    ); 
+                    context.go('/login');
                   },
                 ),
               ],
